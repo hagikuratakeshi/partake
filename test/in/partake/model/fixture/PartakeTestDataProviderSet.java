@@ -3,27 +3,28 @@ package in.partake.model.fixture;
 import in.partake.model.IPartakeDAOs;
 import in.partake.model.dao.DAOException;
 import in.partake.model.dao.PartakeConnection;
-import in.partake.model.fixture.impl.UserCalendarLinkTestDataProvider;
-import in.partake.model.fixture.impl.EventCommentTestDataProvider;
-import in.partake.model.fixture.impl.UserTicketTestDataProvider;
 import in.partake.model.fixture.impl.EventActivityTestDataProvider;
+import in.partake.model.fixture.impl.EventCommentTestDataProvider;
 import in.partake.model.fixture.impl.EventFeedTestDataProvider;
 import in.partake.model.fixture.impl.EventMessageTestDataProvider;
+import in.partake.model.fixture.impl.EventScheduleCandidateTestDataProvider;
 import in.partake.model.fixture.impl.EventTestDataProvider;
 import in.partake.model.fixture.impl.EventTicketNotificationTestDataProvider;
 import in.partake.model.fixture.impl.EventTicketTestDataProvider;
-import in.partake.model.fixture.impl.UserImageTestDataProvider;
 import in.partake.model.fixture.impl.MessageEnvelopeTestDataProvider;
 import in.partake.model.fixture.impl.MessageTestDataProvider;
-import in.partake.model.fixture.impl.UserOpenIDLinkTestDataProvider;
-import in.partake.model.fixture.impl.UserThumbnailTestDataProvider;
-import in.partake.model.fixture.impl.UserTwitterLinkTestDataProvider;
 import in.partake.model.fixture.impl.TwitterMessageTestDataProvider;
+import in.partake.model.fixture.impl.UserCalendarLinkTestDataProvider;
+import in.partake.model.fixture.impl.UserImageTestDataProvider;
 import in.partake.model.fixture.impl.UserNotificationTestDataProvider;
+import in.partake.model.fixture.impl.UserOpenIDLinkTestDataProvider;
 import in.partake.model.fixture.impl.UserPreferenceTestDataProvider;
 import in.partake.model.fixture.impl.UserReceivedMessageTestDataProvider;
 import in.partake.model.fixture.impl.UserSentMessageTestDataProvider;
 import in.partake.model.fixture.impl.UserTestDataProvider;
+import in.partake.model.fixture.impl.UserThumbnailTestDataProvider;
+import in.partake.model.fixture.impl.UserTicketTestDataProvider;
+import in.partake.model.fixture.impl.UserTwitterLinkTestDataProvider;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,7 @@ public class PartakeTestDataProviderSet {
     private MessageEnvelopeTestDataProvider messageEnvelopeProvider;
     private UserThumbnailTestDataProvider thumbnailProvider;
     private TwitterMessageTestDataProvider twitterMessageProvider;
+    private EventScheduleCandidateTestDataProvider eventScheduleCandidateProvider;
 
     public PartakeTestDataProviderSet() {
         this.providers = new ArrayList<TestDataProvider<?>>();
@@ -81,6 +83,7 @@ public class PartakeTestDataProviderSet {
         providers.add(userMessageProvider = createUserReceivedMessageTestDataProvider());
         providers.add(userSentMessageProvider = createUserSentMessageTestDataProvider());
         providers.add(userNotificationProvider = createUserNotificationTestDataProvider());
+        providers.add(eventScheduleCandidateProvider = createEventScheduleCandidateTestDataProvider());
     }
 
     public void createFixtures(PartakeConnection con, IPartakeDAOs daos) throws DAOException {
@@ -172,6 +175,10 @@ public class PartakeTestDataProviderSet {
     public UserNotificationTestDataProvider getUserNotificationProvider() {
         return userNotificationProvider;
     }
+    
+    public EventScheduleCandidateTestDataProvider getEventScheduleCandidateProvider() {
+    	return eventScheduleCandidateProvider;
+    }
 
     private UserCalendarLinkTestDataProvider createCalendarLinkageTestDataProvider() {
         return new UserCalendarLinkTestDataProvider();
@@ -255,5 +262,9 @@ public class PartakeTestDataProviderSet {
 
     private EventTicketTestDataProvider createEventTicketTestDataProvider() {
         return new EventTicketTestDataProvider();
+    }
+    
+    private EventScheduleCandidateTestDataProvider createEventScheduleCandidateTestDataProvider() {
+        return new EventScheduleCandidateTestDataProvider();
     }
 }

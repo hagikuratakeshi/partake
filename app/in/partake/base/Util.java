@@ -1,5 +1,7 @@
 package in.partake.base;
 
+import in.partake.model.dto.auxiliary.EventScheduleStatus;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -294,4 +296,15 @@ public final class Util {
             return "";
         }
     }
+
+	public static Map<String, EventScheduleStatus> parseUserScheduleCandidate(JSONObject map) {
+		Map<String, EventScheduleStatus> result = new HashMap<String, EventScheduleStatus>();
+		for (Object entryObj : map.entrySet()) {
+			@SuppressWarnings("unchecked")
+			Entry<String, String> entry = (Entry<String, String>) entryObj;
+
+			result.put(entry.getKey(), EventScheduleStatus.valueOf(entry.getValue()));
+		}
+		return result;
+	}
 }

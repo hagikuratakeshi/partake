@@ -3,6 +3,7 @@ package in.partake.model.dao;
 import in.partake.model.IPartakeDAOs;
 import in.partake.model.dao.access.IAccess;
 import in.partake.model.dao.access.IConfigurationItemAccess;
+import in.partake.model.dao.access.IEventScheduleCandidateAccess;
 import in.partake.model.dao.access.IUserCalendarLinkageAccess;
 import in.partake.model.dao.access.IEventCommentAccess;
 import in.partake.model.dao.access.IUserTicketAccess;
@@ -53,6 +54,7 @@ public abstract class PartakeDAOFactory implements IPartakeDAOs {
 
     private final IUserNotificationAccess userNotificationAccess;
     private final IUserSentMessageAccess userSentMessageAccess;
+    private final IEventScheduleCandidateAccess eventScheduleCandidateAccess;
 
     private final List<IAccess<?, ?>> daos;
 
@@ -81,6 +83,7 @@ public abstract class PartakeDAOFactory implements IPartakeDAOs {
         addDao(messageEnvelopeAccess = createMessageEnvelopeAccess());
         addDao(userNotificationAccess = createUserNotificationAccess());
         addDao(userSentMessageAccess = createUserSentMessageAccess());
+        addDao(eventScheduleCandidateAccess = createEventScheduleCandidateAccess());
     }
 
     public void initialize(PartakeConnection con) throws DAOException {
@@ -200,6 +203,11 @@ public abstract class PartakeDAOFactory implements IPartakeDAOs {
     public IUserSentMessageAccess getUserSentMessageAccess() {
         return this.userSentMessageAccess;
     }
+    
+    @Override
+    public IEventScheduleCandidateAccess getEventScheduleCandidateAccess() {
+    	return this.eventScheduleCandidateAccess;
+    }
 
     protected abstract IConfigurationItemAccess createConfiguraitonItemAccess();
     protected abstract IUserCalendarLinkageAccess createCalendarLinkageAccess();
@@ -223,4 +231,5 @@ public abstract class PartakeDAOFactory implements IPartakeDAOs {
     protected abstract IMessageEnvelopeAccess createMessageEnvelopeAccess();
     protected abstract IUserNotificationAccess createUserNotificationAccess();
     protected abstract IUserSentMessageAccess createUserSentMessageAccess();
+    protected abstract IEventScheduleCandidateAccess createEventScheduleCandidateAccess();
 }

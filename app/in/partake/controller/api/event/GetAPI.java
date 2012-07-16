@@ -32,7 +32,6 @@ public class GetAPI extends AbstractPartakeAPI {
             passcode = session().get("event:" + eventId);
 
         EventEx event = new GetTransaction(user, eventId, passcode).execute();
-
         JSONObject obj = new JSONObject();
         obj.put("event", event.toSafeJSON());
         return renderOK(obj);

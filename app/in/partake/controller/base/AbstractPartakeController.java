@@ -6,6 +6,8 @@ import in.partake.base.TimeUtil;
 import in.partake.base.Util;
 import in.partake.controller.PartakeActionContext;
 import in.partake.controller.PartakeTestContext;
+import in.partake.controller.base.permission.PrivateEventShowPermission;
+import in.partake.model.EventEx;
 import in.partake.model.IPartakeDAOs;
 import in.partake.model.UserEx;
 import in.partake.model.access.DBAccess;
@@ -459,6 +461,23 @@ public abstract class AbstractPartakeController extends Controller {
             throw new PartakeException(UserErrorCode.INVALID_PROHIBITED);
 
         return user;
+    }
+    
+    protected void ensureEventViewPermission(EventEx event, UserEx user, String passcode) throws PartakeException {
+    	if (event == null)
+            throw new PartakeException(UserErrorCode.INVALID_EVENT_ID);
+
+        if (!StringUtils.isBlank(event.getPasscode())) {
+            // owner および manager は見ることが出来る。
+            if (user != null && PrivateEventShowPermission.check(event, user)) {
+                // OK. You have the right to show this event.
+            } else if (StringUtils.equals(event.getPasscode(), passcode)) {
+                // OK. The same passcode.
+            } else {
+                // public でなければ、passcode を入れなければ見ることが出来ない
+                throw new PartakeException(UserErrorCode.FORBIDDEN_EVENT_SHOW);
+            }
+        }
     }
 
     // ----------------------------------------------------------------------

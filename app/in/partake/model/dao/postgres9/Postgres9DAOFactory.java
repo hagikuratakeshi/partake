@@ -9,6 +9,7 @@ import in.partake.model.dao.access.IEventActivityAccess;
 import in.partake.model.dao.access.IEventCommentAccess;
 import in.partake.model.dao.access.IEventFeedAccess;
 import in.partake.model.dao.access.IEventMessageAccess;
+import in.partake.model.dao.access.IEventScheduleCandidateAccess;
 import in.partake.model.dao.access.IEventTicketAccess;
 import in.partake.model.dao.access.IEventTicketNotificationAccess;
 import in.partake.model.dao.access.IMessageAccess;
@@ -32,6 +33,7 @@ import in.partake.model.dao.postgres9.impl.Postgres9EventDao;
 import in.partake.model.dao.postgres9.impl.Postgres9EventFeedDao;
 import in.partake.model.dao.postgres9.impl.Postgres9EventMessageDao;
 import in.partake.model.dao.postgres9.impl.Postgres9EventNotificationDao;
+import in.partake.model.dao.postgres9.impl.Postgres9EventScheduleCandidateAccessDao;
 import in.partake.model.dao.postgres9.impl.Postgres9EventTicketDao;
 import in.partake.model.dao.postgres9.impl.Postgres9MessageDao;
 import in.partake.model.dao.postgres9.impl.Postgres9MessageEnvelopeDao;
@@ -167,4 +169,9 @@ public class Postgres9DAOFactory extends PartakeDAOFactory {
     protected IUserSentMessageAccess createUserSentMessageAccess() {
         return new Postgres9UserSentMessageDao();
     }
+
+	@Override
+	public IEventScheduleCandidateAccess createEventScheduleCandidateAccess() {
+		return new Postgres9EventScheduleCandidateAccessDao();
+	}
 }

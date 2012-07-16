@@ -7,6 +7,7 @@ import in.partake.model.dao.access.IEventActivityAccess;
 import in.partake.model.dao.access.IEventCommentAccess;
 import in.partake.model.dao.access.IEventFeedAccess;
 import in.partake.model.dao.access.IEventMessageAccess;
+import in.partake.model.dao.access.IEventScheduleCandidateAccess;
 import in.partake.model.dao.access.IEventTicketAccess;
 import in.partake.model.dao.access.IEventTicketNotificationAccess;
 import in.partake.model.dao.access.IMessageAccess;
@@ -139,4 +140,9 @@ public class MockDaoFactory extends PartakeDAOFactory {
     protected IUserSentMessageAccess createUserSentMessageAccess() {
         return Mockito.mock(IUserSentMessageAccess.class);
     }
+
+	@Override
+	protected IEventScheduleCandidateAccess createEventScheduleCandidateAccess() {
+		return Mockito.mock(IEventScheduleCandidateAccess.class);
+	}
 }
